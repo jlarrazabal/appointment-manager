@@ -1,9 +1,9 @@
 const { Model, DataTypes} = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Services extends Model {}
+class Service extends Model {}
 
-Services.init(
+Service.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -29,10 +29,13 @@ Services.init(
       },
     price: {
       type: DataTypes.DECIMAL(5,2),
-      allowNull: false, 
+      allowNull: false,
+      validate: {
+        isDecimal: true
+      }
     },
     descounted_price: {
-        type: DataTypes.DECIMAL,
+        type: DataTypes.DECIMAL(5,2),
         allowNull: false,
         validate: {
           isDecimal: true,
@@ -45,8 +48,8 @@ Services.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'services',
+    modelName: 'service',
   }
 );
 
-module.exports = Services;
+module.exports = Service;
