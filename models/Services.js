@@ -1,4 +1,4 @@
-const { Model, DataTypes, DECIMAL } = require('sequelize');
+const { Model, DataTypes} = require('sequelize');
 const sequelize = require('../config/connection');
 
 class Services extends Model {}
