@@ -16,7 +16,11 @@ User.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
+    first_name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    last_name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -33,8 +37,15 @@ User.init(
       allowNull: false,
       validate: {
         len: [8],
-      },
+      }
     },
+    appoiments_counter: {
+      type: DataTypes.INTEGER,
+      validate: {
+      isNumeric: true,
+      },
+      defaultValue: 0
+    }
   },
   {
     hooks: {
