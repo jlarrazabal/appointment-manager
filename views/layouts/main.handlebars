@@ -73,26 +73,9 @@
     </div>
   </div>
     {{/if}}
-    {{#if services}}
+    
+{{{body}}}
 
-  <div class="card">
-    <div id="services"class="card-header">
-      Services
-    </div>
-    {{#each services as |service|}}
-    <div class="row">
-        <div class="col-sm-6">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">{{Service Name}}</h5>
-              <p class="card-text">{{Some description}}</p>
-              <a href="#" class="btn btn-primary">Make Appointment</a>
-            </div>
-          </div>
-        </div>
-    {{/each}}
-  </div>
-  {{/if}}
   {{#if business_hours}}
   <div class="card">
     <div id="business-hours"class="card-header">
