@@ -28,6 +28,13 @@ Appointment.init(
         allowNull: false,
         defaultValue: DataTypes.NOW,
     },
+    calender_id: {
+      type: DataTypes.INTEGER,
+      references: {
+      model: 'calender',
+      key: 'id',
+    },
+  },
     user_id: {
         type: DataTypes.INTEGER,
         references: {
