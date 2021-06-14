@@ -13,23 +13,25 @@ Appointment.init(
     },
     service_id: {
         type: DataTypes.INTEGER,
+        allowNull: false,
         references: {
             model: 'service',
             key: 'id',
         },
     },
     payment_id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
-        primaryKey: true,
     },
-    date_created: {
-        type: DataTypes.DATE,
+    date: {
+        type: DataTypes.DATEONLY,
         allowNull: false,
-        defaultValue: DataTypes.NOW,
+        validate: {
+          isDate: true
+        },
     },
     day: {
-      type: DataTypes.DATE,
+      type: DataTypes.INTEGER,
       allowNull: false,
       references: {
         model: 'calender',
@@ -37,7 +39,7 @@ Appointment.init(
       },
     },
     hour: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
       references: {
         model: 'calender',
@@ -46,6 +48,7 @@ Appointment.init(
   },
     user_id: {
         type: DataTypes.INTEGER,
+        allowNull: false,
         references: {
         model: 'user',
         key: 'id',
