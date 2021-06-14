@@ -28,12 +28,13 @@ Appointment.init(
         allowNull: false,
         defaultValue: DataTypes.NOW,
     },
-    calender_id: {
-      type: DataTypes.INTEGER,
-      references: {
-      model: 'calender',
-      key: 'id',
+    day: {
+      type: DataTypes.DATE,
+      allowNull: false,
     },
+    hour: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
   },
     user_id: {
         type: DataTypes.INTEGER,
@@ -48,7 +49,7 @@ Appointment.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'appoitnment',
+    modelName: 'appointment',
   }
 );
 
