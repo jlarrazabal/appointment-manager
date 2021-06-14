@@ -1,67 +1,77 @@
-const { Model, DataTypes } = require('sequelize');
+const {
+  Model,
+  DataTypes
+} = require('sequelize');
 const sequelize = require('../config/connection');
 
 class Appointment extends Model {}
 
-Appointment.init(
-  {
-    id: {
+Appointment.init({
+      id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true,
-    },
-    service_id: {
+      },
+      service_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'service',
-            key: 'id',
+          model: 'service',
+          key: 'id',
         },
-    },
-    payment_id: {
+      },
+      payment_id: {
         type: DataTypes.STRING,
         allowNull: false,
-    },
-    date: {
+      },
+      date: {
         type: DataTypes.DATEONLY,
         allowNull: false,
         validate: {
           isDate: true
         },
-    },
-    day: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'calender',
-        key: 'day',
       },
-    },
-    hour: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      references: {
-        model: 'calender',
-        key: 'hour',
-      },
-  },
-    user_id: {
+      day: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-        model: 'user',
-        key: 'id',
+          model: 'calendar',
+          key: 'day',
+        },
       },
-    },
-  },
-  {
-    sequelize,
-    timestamps: false,
-    freezeTableName: true,
-    underscored: true,
-    modelName: 'appointment',
-  }
-);
+      hour: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        references: {
+          model: 'calendar',
+          key: 'hour',
+        },
+      },
+      user_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'user',
+          key: 'id',
+        }
+      },
+        calendar_id: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
+          references: {
+            model: 'calendar',
+            key: 'id',
+          },
+        },
+      },
+      {
+        sequelize,
+        timestamps: false,
+        freezeTableName: true,
+        underscored: true,
+        modelName: 'appointment',
+      }
+    );
 
-module.exports = Appointment;
+    module.exports = Appointment;
