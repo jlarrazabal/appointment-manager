@@ -34,7 +34,7 @@ Appointment.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'calender',
+        model: 'calendar',
         key: 'day',
       },
     },
@@ -42,7 +42,7 @@ Appointment.init(
       type: DataTypes.STRING,
       allowNull: false,
       references: {
-        model: 'calender',
+        model: 'calendar',
         key: 'hour',
       },
   },
