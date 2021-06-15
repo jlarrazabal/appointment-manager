@@ -28,8 +28,8 @@ Services.init(
         }
       },
     price: {
-      type: DataTypes.DECIMAL,
-      allowNull: false,
+      type: DataTypes.DECIMAL(5,2),
+      allowNull: false, 
     },
     descounted_price: {
         type: DataTypes.DECIMAL,
