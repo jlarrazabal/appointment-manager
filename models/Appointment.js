@@ -54,7 +54,8 @@ Appointment.init({
         references: {
           model: 'user',
           key: 'id',
-        },
+        }
+      },
         calendar_id: {
           type: DataTypes.INTEGER,
           allowNull: false,
