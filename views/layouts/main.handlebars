@@ -14,12 +14,12 @@
   <div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-        
+
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <span>Lady Lash</span>
-  
+
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
               <li class="nav-item">
@@ -44,12 +44,16 @@
                 <a class="nav-link" href="#contact-us">Contact Us</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Login/Logout</a>
+                {{#if logged_in}}
+                <a class="nav-link" href="#" id="logout">Logout</a>
+                {{else}}
+                <a class="nav-link" href="/login">Login</a>
+                {{/if}}
               </li>
             </ul>
           </div>
         </div>
-      </nav> 
+      </nav>
   </div>
 </div>
 
@@ -82,4 +86,3 @@
       }
     </script>
   {{/if}}
-
