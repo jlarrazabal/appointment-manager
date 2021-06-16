@@ -96,5 +96,8 @@ router.get("/avaliability", async (req, res) => {
 
 
 
+router.get('/lady-lash-admin-homepage/service', (req, res) => {
+  res.render('createService.handlebars');
+});
 
 module.exports = router;
