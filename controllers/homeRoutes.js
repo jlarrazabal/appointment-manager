@@ -73,5 +73,28 @@ router.get("/lady-lash-admin-page", async (req, res) => {
   }
 });
 
+//avaliabiliy  -GET
+router.get("/avaliability", async (req, res) => {
+  try {
+    const calenderData = await Calender.findAll({});
+      if(!req.session.logged_in) {
+        const response = {
+          avaliability: true,
+        }
+        res.render("notFound", response);
+    } else {
+      const response = {
+        make_appointment: true,
+      }
+        res.render("homepage", response);
+      }
+  } catch(err) {
+    res.status(500).json(err);
+  }
+});
+
+
+
+
 
 module.exports = router;
