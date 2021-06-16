@@ -52,4 +52,40 @@ router.post('/logout', (req, res) => {
   }
 });
 
+
+router.post("/signup", async (req, res) => {
+  try {
+    const lookEmail = await User.findOne({
+      where: {
+        email: req.body.email
+      }
+    });
+    if (!lookEmail) {
+      const newUser = await User.create({
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        email: req.body.email,
+        password: req.body.password
+      });
+      req.session.save(async (err) => {
+        if (err) {
+          console.log(err);
+        } else {
+          req.session.user_id = newUser.id;
+          req.session.logged_in = true;     
+          res.render('service', {
+            logged_in: req.session.logged_in,
+            user_id: req.session.user_id, 
+          });
+        }
+      });
+    } else {
+      res.render("existingUsername");
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;
