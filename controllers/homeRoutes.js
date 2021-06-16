@@ -29,7 +29,7 @@ router.get("/", async (req, res) => {
           about_us: true,
           business_hours: true
         }
-        res.render("service", response);
+        res.render("homepage", response);
       } else {
         const response = {
           services: {services},
@@ -38,7 +38,7 @@ router.get("/", async (req, res) => {
           logged_in: req.session.logged_in,
           user_id: req.session.user_id,
         }
-        res.render("service", response);
+        res.render("homepage", response);
       }
     }
   } catch(err) {
@@ -55,6 +55,23 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
+router.get("/lady-lash-admin-page", async (req, res) => {
+  try {
+    const appointmentData = await Appointment.findAll({
+      include: [{
+        model: "user",
+        attributes: ["id","first_name","last_name","appoiments_counter"]
+      },
+    {
+      model: "service",
+      attributes: ["id","name"]
+    }],
+      where: {date: req.body.date}
+    });
+  } catch(err) {
+    res.status(500).json(err);
+  }
+});
 
 
 module.exports = router;

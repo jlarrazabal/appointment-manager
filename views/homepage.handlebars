@@ -1,24 +1,47 @@
-<!-- Loop over each object in the projects array -->
-{{#each projects as |project| }}
-<div class="row mb-4 project">
-  <div class="col-md-5">
-    <h2>
-      <!-- Call helper function with triple brackets to render the emoji span as HTML -->
-      {{{get_emoji}}}
-      <a href="/project/{{project.id}}">{{project.name}}</a>
-    </h2>
-    <p>
-      <span for="img" aria-label="money">💲</span>
-      <!-- Pass needed_funding value to the helper function -->
-      <span class="dollar-amount">{{format_amount project.needed_funding}}</span>
-      needed!
-    </p>
-    <p>Created by {{project.user.name}} on {{format_date project.date_created}}</p>
+{{#if about_us}}
+  <div class="card">
+    <div id="about-us" class="card-header">
+      <h3>About Us</h3>
+    </div>
+    <div class="card-body">
+      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    </div>
   </div>
-  <div class="col-md-7">
-    <p>
-      {{project.description}}
-    </p>
+{{/if}}
+<section>
+  <div class="card">
+    <div class="card-header">
+      <h3>Services</h3>
+    </div>
   </div>
-</div>
-{{/each}}
+  {{#each services.services as |service|}}
+    <div class="card">
+      <div id="services" class="card-header">
+        <h3>{{name}}</h3>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Service Details</h5>
+              <p class="card-text">Description: {{description}}</p>
+              <p class="card-text">Regular Price: {{price}}</p>
+              <p class="card-text">Special Price {{descounted_price}}*</p>
+              <p class="card-text">*Offered after every five purchases.</p>
+              <a href="#" class="btn btn-primary">Make Appointment</a>
+            </div>
+          </div>
+        </div>
+      </div>
+  {{/each}}
+</section>
+{{#if business_hours}}
+  <div class="card">
+    <div id="business-hours" class="card-header">
+      <h3>Business Hours</h3>
+    </div>
+    <div class="card-body">
+      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    </div>
+  </div>
+{{/if}}
