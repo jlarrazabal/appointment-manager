@@ -25,18 +25,18 @@ Appointment.init({
     type: DataTypes.STRING,
     allowNull: false,
   },
-  date: {
+  app_date: {
     type: DataTypes.DATEONLY,
     allowNull: false,
     validate: {
       isDate: true
     },
   },
-  day: {
+  app_day: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  hour: {
+  app_hour: {
     type: DataTypes.STRING,
     allowNull: false,
   },
