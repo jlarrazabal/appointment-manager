@@ -13,7 +13,7 @@ Appointment.belongsTo(User, {
 });
 
 Service.hasMany(Appointment, {
-  foreignKey: 'user_id',
+  foreignKey: 'service_id',
   onDelete: 'CASCADE'
 });
 
@@ -22,7 +22,7 @@ Appointment.belongsTo(Service, {
 });
 
 Calendar.hasMany(Appointment, {
-  foreignKey: 'user_id',
+  foreignKey: 'calendar_id',
   onDelete: 'CASCADE'
 });
 

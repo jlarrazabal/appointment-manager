@@ -35,18 +35,10 @@ Appointment.init({
   day: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    references: {
-      model: 'calendar',
-      key: 'day',
-    },
   },
   hour: {
     type: DataTypes.STRING,
     allowNull: false,
-    references: {
-      model: 'calendar',
-      key: 'hour',
-    },
   },
   user_id: {
     type: DataTypes.INTEGER,
