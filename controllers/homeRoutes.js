@@ -74,7 +74,7 @@ router.get("/lady-lash-admin-page", async (req, res) => {
 });
 
 //avaliabiliy  -GET
-router.get("/avaliability", async (req, res) => {
+router.get("/avaliability", withAuth, async (req, res) => {
   try {
     const calenderData = await Calender.findAll({});
       if(!req.session.logged_in) {
