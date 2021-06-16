@@ -7,16 +7,38 @@ router.get("/", async (req, res) => {
     const servicesData = await Service.findAll({});
     if(!servicesData.length){
       if(!req.session.logged_in) {
-        res.render("notFound");
+        const response = {
+          about_us: true,
+          business_hours: true
+        }
+        res.render("notFound", response);
       } else {
-        res.render("notFound", {logged_in: req.session.logged_in, user_id: req.session.user_id});
+        const response = {
+          about_us: true,
+          business_hours: true,
+          logged_in: req.session.logged_in,
+          user_id: req.session.user_id,
+        }
+        res.render("notFound", response);
       }
     } else {
       const services = servicesData.map(service => service.get({plain: true}));
       if(!req.session.logged_in) {
-        res.render("homepage", {services: {services}});
+        const response = {
+          services: {services},
+          about_us: true,
+          business_hours: true
+        }
+        res.render("service", response);
       } else {
-        res.render("homepage", {logged_in: req.session.logged_in, user_id: req.session.user_id, services: {services}});
+        const response = {
+          services: {services},
+          about_us: true,
+          business_hours: true,
+          logged_in: req.session.logged_in,
+          user_id: req.session.user_id,
+        }
+        res.render("service", response);
       }
     }
   } catch(err) {
