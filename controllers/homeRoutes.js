@@ -49,15 +49,15 @@ router.get("/", async (req, res) => {
 
 router.get('/login', (req, res) => {
   if (req.session.logged_in) {
-    res.redirect('/service');
+    res.redirect('/');
     return;
   }
   res.render('login');
 });
 
-router.get("/lady-lash-admin-page", async (req, res) => {
+router.get("/lady-lash-admin-homepage", async (req, res) => {
   try {
-    const appointmentData = await Appointment.findAll({
+    const appointmentsData = await Appointment.findAll({
       include: [{
         model: "user",
         attributes: ["id","first_name","last_name","appoiments_counter"]
@@ -65,9 +65,15 @@ router.get("/lady-lash-admin-page", async (req, res) => {
     {
       model: "service",
       attributes: ["id","name"]
+    },
+    {
+      model: "calendar",
+      attributes: ["id","day","hour","start_date","end_date"]
     }],
       where: {date: req.body.date}
     });
+    const appointments = appointmentsData.map(appointment => appointment.get({plain: true}));
+    res.status(200).json({appointments});
   } catch(err) {
     res.status(500).json(err);
   }
