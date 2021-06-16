@@ -4,10 +4,11 @@ const logout = async () => {
     headers: { 'Content-Type': 'application/json' },
   });
 
-  if (response.ok) {
-    document.location.replace('/');
+  if(response.ok) {
+    console.log("User logged out succesfully");
+    location.reload();
   } else {
-    alert(response.statusText);
+    console.log(respose.statusText);
   }
 };
 
