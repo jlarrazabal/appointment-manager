@@ -1,52 +1,55 @@
-const { Model, DataTypes} = require('sequelize');
+const {
+  Model,
+  DataTypes
+} = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Services extends Model {}
+class Service extends Model {}
 
-Services.init(
-  {
-    id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        isAlpha: true,
-        notNull: true,
-      }
-    },
-    description: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          isAlpha: true,
-          notNull: true,
-        }
-      },
-    price: {
-      type: DataTypes.DECIMAL(5,2),
-      allowNull: false, 
-    },
-    descounted_price: {
-        type: DataTypes.DECIMAL,
-        allowNull: false,
-        validate: {
-          isDecimal: true,
-          notNull: true,
-        }
-      },
+Service.init({
+  id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    primaryKey: true,
+    autoIncrement: true,
   },
-  {
-    sequelize,
-    timestamps: false,
-    freezeTableName: true,
-    underscored: true,
-    modelName: 'services',
-  }
-);
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      isAlpha: true,
+      notNull: true,
+    }
+  },
+  description: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      isAlpha: true,
+      notNull: true,
+    }
+  },
+  price: {
+    type: DataTypes.DECIMAL(5, 2),
+    allowNull: false,
+    validate: {
+      isDecimal: true
+    }
+  },
+  descounted_price: {
+    type: DataTypes.DECIMAL(5, 2),
+    allowNull: false,
+    validate: {
+      isDecimal: true,
+      notNull: true,
+    }
+  },
+}, {
+  sequelize,
+  timestamps: false,
+  freezeTableName: true,
+  underscored: true,
+  modelName: 'service',
+});
 
-module.exports = Services;
+module.exports = Service;

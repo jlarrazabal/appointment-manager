@@ -1,13 +1,33 @@
 const User = require('./User');
-const BlockDay = require('./BlockDay')
+const Appointment = require('./Appointment');
+const Service = require('./Service');
+const Calendar = require('./Calendar');
 
-User.hasMany(ModelName, {
+User.hasMany(Appointment, {
   foreignKey: 'user_id',
   onDelete: 'CASCADE'
 });
 
-ModelName.belongsTo(User, {
+Appointment.belongsTo(User, {
   foreignKey: 'user_id'
 });
 
-module.exports = { User, BlockDay};
+Service.hasMany(Appointment, {
+  foreignKey: 'service_id',
+  onDelete: 'CASCADE'
+});
+
+Appointment.belongsTo(Service, {
+  foreignKey: 'service_id'
+});
+
+Calendar.hasMany(Appointment, {
+  foreignKey: 'calendar_id',
+  onDelete: 'CASCADE'
+});
+
+Appointment.belongsTo(Calendar, {
+  foreignKey: 'calendar_id'
+});
+
+module.exports = {User, Appointment, Service, Calendar};
