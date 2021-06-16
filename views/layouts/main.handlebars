@@ -6,15 +6,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Appointment-manager</title>
   <link rel="stylesheet" href="/css/jass.css">
-  <link rel="stylesheet" href="/css/style.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-  
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <div class="jumbotron">
-    <h3 class="display-4">Lady Lash</h3>
-    <p class="lead">Some text here</p>
-    <hr class="my-4">
+  <h3 class="display-4">Lady Lash</h3>
+  <p class="lead">Some text here</p>
+  <hr class="my-4">
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Create Appointment</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Manage Appointment</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about-us">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#services">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#business-hours">Business Hours</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact-us">Contact Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Login/Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
@@ -56,48 +92,23 @@
 </div>
 
 <div class="card mb-3">
-    <img class="card-img-top" src="..." alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    </div>
+  <img class="card-img-top" src="http://i.imgur.com/I86rTVl.jpg" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
   </div>
-    {{#if about_us}}
-<div class="card">
-    <div id="about-us"class="card-header">
-      About Us
-    </div>
-    <div class="card-body">
-      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-    </div>
-  </div>
-    {{/if}}
+</div>
 
 {{{body}}}
 
-  {{#if business_hours}}
-  <div class="card">
-    <div id="business-hours"class="card-header">
-      Business Hours
-    </div>
-    <div class="card-body">
-      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-    </div>
+<div class="card text-center">
+  <div id="contact-us" class="card-header">
+    Contact Us
   </div>
-  {{/if}}
-
-  <div class="card text-center">
-    <div id="contact-us"class="card-header">
-      Contact Us
-    </div>
-    <div class="card-body">
-      <h5 class="card-title">Special title treatment</h5>
-      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-      <a href="#" class="btn btn-primary">Instagram</a>
-    </div>
-    <div class="card-footer text-muted">
-      2 days ago
-    </div>
+  <div class="card-body">
+    <h5 class="card-title">Special title treatment</h5>
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    <a href="#" class="btn btn-primary">Instagram</a>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
