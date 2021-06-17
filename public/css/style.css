@@ -26,3 +26,7 @@ header, .project:not(:last-child) {
 .card-img-top {
   max-height: 400px;
 }
+
+.list-group {
+  display: block
+}
