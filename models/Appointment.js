@@ -23,7 +23,7 @@ Appointment.init({
   },
   payment_id: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   app_date: {
     type: DataTypes.DATEONLY,
