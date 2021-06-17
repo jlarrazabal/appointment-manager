@@ -103,19 +103,12 @@ router.get("/avaliability", async (req, res) => {
       };
       res.render("avaliability", availability);
     }} else {
-      res.redirect("/create-appointment");
+      res.redirect("/appointment");
     }
   } catch (err) {
     res.status(500).json(err);
   }
 });
-
-
-
-
-
-
-
 
 router.get('/lady-lash-admin-homepage/service', (req, res) => {
   res.render('createService.handlebars');
