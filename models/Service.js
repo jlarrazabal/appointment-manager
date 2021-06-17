@@ -17,7 +17,6 @@ Service.init({
     type: DataTypes.STRING,
     allowNull: false,
     validate: {
-      isAlpha: true,
       notNull: true,
     }
   },
@@ -25,7 +24,6 @@ Service.init({
     type: DataTypes.STRING,
     allowNull: false,
     validate: {
-      isAlpha: true,
       notNull: true,
     }
   },
@@ -33,7 +31,8 @@ Service.init({
     type: DataTypes.DECIMAL(5, 2),
     allowNull: false,
     validate: {
-      isDecimal: true
+      isDecimal: true,
+      notNull: true,
     }
   },
   descounted_price: {
