@@ -30,4 +30,5 @@ Appointment.belongsTo(Calendar, {
   foreignKey: 'calendar_id'
 });
 
+
 module.exports = {User, Appointment, Service, Calendar};

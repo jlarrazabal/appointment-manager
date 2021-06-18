@@ -1,23 +1,24 @@
-<!-- Javascript for running the datepicker function in the newAppoiment.handlebar -->
- <form action="" method="post"class="form signup-form">
+<form action="/appointment/date" method="get"class="form signup-form">
         <div class="form-group form-floating mb-3 col-3">
           <div> Please select a date for your appoiment:</div>
           <br>
           <input name="app_date" class="form-input form-control col-6" type ="text" id ="datepicker-4" />
+          <button class="btn btn-primary" type="submit">Check availability</button>
         </div>
  </form>
+
  <script>
-       $(function() {
-          $( "#datepicker-4" ).datepicker({
-             dateFormat:"yy-mm-dd",
-             altField: "#datepicker-4",
-             altFormat: "DD, d MM, yy",
-             beforeShowDay : function (date) {
-                var dayOfWeek = date.getDay ();
-                // 0 : Sunday, 1 : Monday, ...
-                if (dayOfWeek == 0 || dayOfWeek == 6) return [false];
-                else return [true];
-               }
-             });
-           });
- </script>
+        $(function() {
+           $( "#datepicker-4" ).datepicker({
+              dateFormat:"yy-mm-dd",
+              altField: "#datepicker-4",
+              altFormat: "DD, d MM, yy",
+              beforeShowDay : function (date) {
+                 var dayOfWeek = date.getDay ();
+                 // 0 : Sunday, 1 : Monday, ...
+                 if (dayOfWeek == 0 || dayOfWeek == 6) return [false];
+                 else return [true];
+                }
+              });
+            });
+</script>
