@@ -1,29 +1,26 @@
 const router = require('express').Router();
-const {User, Appointment, Service, Calendar} = require('../../models');
+const {
+  User,
+  Appointment,
+  Service,
+  Calendar
+} = require('../../models');
 const withAuth = require('../../utils/auth');
 
-
-router.post('/new', withAuth, async (req, res) => {
-    try {
-        const findAppointments = await Appointment.findAll({where: {app_date: req.body.app_date}});
-        if(findAppointments.length === 5) {
-            res.status(400).json({message: "We don't have any available appointment for the selected date!"})
-         return;
-         }
-         const newAppointment = await Appointment.create({
-             name: req.body.name,
-             description: req.body.description,
-             price: req.body.price,
-             descounted_price: req.body.price*0.7,
-         });
-         const serNewService = newService.get({plain: true})   
-         res.status(200).json({serNewService});
- 
-     } catch (err) {
-     console.log(err);
-     res.status(500).json(err);
-    };
- }); 
-
+router.post("/create", async (req, res) => {
+  try {
+    const newAppointment = await Appointment.create({
+        user_id: req.body.user_id,
+        app_date: req.body.app_date,
+        app_day: req.body.app_day,
+        app_hour: req.body.app_hour,
+        service_id: req.body.service_id,
+        calendar_id: req.body.calendar_id
+    });
+    res.status(200).json(newAppointment);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 module.exports = router;
