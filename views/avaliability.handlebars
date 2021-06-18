@@ -1,0 +1,50 @@
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script>
+        $( function() {
+          $( "#datepicker" ).datepicker();
+        } );
+</script>
+
+     <span class="myDate">Select a date: <input type="text" id="datepicker"></span>
+
+
+    <div>
+     <div class="list-group">
+      {{#if h08}}
+      {{else}}
+      <a href="/login" type="button" class="list-group-item list-group-item-action">08.00 AM   Please click here to make an appointment</a>
+      {{/if}}
+      {{#if h10}}
+      {{else}}
+      <a href="/login" type="button" class="list-group-item list-group-item-action">10.00 AM   Please click here to make an appointment</a>
+      {{/if}}
+      {{#if h12}}
+      {{else}}
+      <a href="/login" type="button" class="list-group-item list-group-item-action">12.00 PM   Please click here to make an appointment</a>
+      {{/if}}
+      {{#if h14}}
+      {{else}}
+      <a href="/login" type="button" class="list-group-item list-group-item-action">2.00 PM    Please click here to make an appointment</a>
+      {{/if}}
+      {{#if h16}}
+      {{else}}
+      <a href="/login" type="button" class="list-group-item list-group-item-action">4.00 PM    Please click here to make an appointment</a>
+      {{/if}}
+      {{#if h18}}
+      {{else}}
+      <a href="/login" type="button" class="list-group-item list-group-item-action">6.00 PM    Please click here to make an appointment</a>
+      {{/if}}
+      {{#if h20}}
+      {{else}}
+      <a href="/login" type="button" class="list-group-item list-group-item-action">8.00 PM    Please click here to make an appointment for AFTER HOURS</a>
+      {{/if}}
+      {{#if h22}}
+      {{else}}
+      <a href="/login"type="button" class="list-group-item list-group-item-action">10.00 PM   Please click here to make an appointment for AFTER HOURS</a>
+      {{/if}}
+    </div>
+
+    
+  
