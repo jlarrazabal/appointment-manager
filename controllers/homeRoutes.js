@@ -125,7 +125,10 @@ router.get('/appointment/date', withAuth, async (req, res) => {
       where: {app_date: req.body.app_date}
     });
     const appointments = appointmentsData.map(appointment => appointment.get({plain: true}));
-    res.status(200).json({appointments});
+    const bookedHours= [];
+    bookedHours.push(appointments.forEach(`${app_hour}`))
+    console.log(bookedHours);
+    res.status(200).json({bookedHours});
   } catch(err) {
     res.status(500).json(err);
   }
