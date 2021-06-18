@@ -92,21 +92,36 @@ router.get("/lady-lash-admin-homepage", withAuth, async (req, res) => {
   }
 });
 
-
+//Avaliability GET
 router.get("/avaliability", async (req, res) => {
   try {
-    const appointmentData = await Appointment.findAll({});
-      if(!req.session.logged_in) {
-       //render avaliability page
-        res.render("avaliability");
-    } else {
-        res.redirect("/create-appointment");
-      }
-  } catch(err) {
+    const appointmentData = await Appointment.findAll({
+    include: [
+    {
+      model: Calendar,
+      attributes: ["id", "day", "hour", "start_date", "end_date"]
+    }]
+   });
+    if(!req.session.logged_in){
+    if (!appointmentData.length) {
+      const availability = {
+        h08: false,
+        h10: false,
+        h12: false,
+        h14: false,
+        h16: false,
+        h18: false,
+        h20: false,
+        h22: false,
+      };
+      res.render("avaliability", availability);
+    }} else {
+      res.redirect("/create-appointment");
+    }
+  } catch (err) {
     res.status(500).json(err);
   }
 });
-
 
 router.get('/lady-lash-admin-homepage/service', (req, res) => {
   res.render('createService.handlebars');
