@@ -111,7 +111,7 @@ router.get("/avaliability", async (req, res) => {
       };
       res.render("avaliability", availability);
     }} else {
-      res.redirect("/create-appointment");
+      res.redirect("/appointment");
     }
   } catch (err) {
     res.status(500).json(err);
