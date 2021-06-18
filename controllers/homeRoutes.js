@@ -46,7 +46,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-
 router.get('/login', (req, res) => {
   if (req.session.logged_in) {
     res.redirect('/');
@@ -54,6 +53,7 @@ router.get('/login', (req, res) => {
   }
   res.render('login');
 });
+
 
 router.get("/lady-lash-admin-homepage", async (req, res) => {
   try {
@@ -111,14 +111,28 @@ router.get("/avaliability", async (req, res) => {
 });
 
 
-
-
-
-
-
-
 router.get('/lady-lash-admin-homepage/service', (req, res) => {
   res.render('createService.handlebars');
 });
+
+
+//Route to the new appoiment page
+router.get('/appointment', withAuth,  async (req, res) => {
+  res.render('newAppointment.handlebars');  
+});
+
+//Route to get the appointment data
+router.get('/appointment/date', withAuth, async (req, res) => {
+  try {
+    const appointmentsData = await Appointment.findAll({
+      where: {app_date: req.body.app_date}
+    });
+    const appointments = appointmentsData.map(appointment => appointment.get({plain: true}));
+    res.status(200).json({appointments});
+  } catch(err) {
+    res.status(500).json(err);
+  }
+
+} )
 
 module.exports = router;
