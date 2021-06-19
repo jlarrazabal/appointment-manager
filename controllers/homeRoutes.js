@@ -221,17 +221,37 @@ router.get("/lady-lash-admin-homepage", withAuth, async (req, res) => {
   }
 });
 
-//Route for availability page
+//Avaliability GET
 router.get("/avaliability", async (req, res) => {
   try {
-    const appointmentData = await Appointment.findAll({
-      include: [{
-        model: Calendar,
-        attributes: ["id", "day", "hour", "start_date", "end_date"]
-      }]
-    });
-    if (!req.session.logged_in) {
-      if (!appointmentData.length) {
+    let date = req.query.app_date;
+    if (!req.query.app_date) {
+      let fullDate = new Date();
+      console.log(fullDate);
+      let day = fullDate.getDate();
+      let month = fullDate.getMonth() + 1;
+      let year = fullDate.getFullYear();
+      if (month < 10) {
+        month = "0" + month;
+      }
+      if (day < 10) {
+        day = "0" + day;
+      }
+      console.log(day, month, year);
+      date = `${year}-${month}-${day}`;
+      console.log(date);
+    } 
+
+    const appointmentsData = await Appointment.findAll({});
+
+    const appointmentsPlain = appointmentsData.map(appointment => appointment.get({
+      plain: true
+    }));
+
+    const dayAppointments = appointmentsPlain.filter(appointment => appointment.app_date === date);
+    console.log(dayAppointments);
+    if(!req.session.logged_in){
+      if (!dayAppointments.length) {
         const availability = {
           h08: false,
           h10: false,
@@ -239,20 +259,69 @@ router.get("/avaliability", async (req, res) => {
           h14: false,
           h16: false,
           h18: false,
-          h20: false,
-          h22: false,
+          h20: false
         };
-        res.render("avaliability", availability);
+        res.render("avaliability", {
+          availability: availability,
+          date: date
+        });
+      } else {
+        let h08 = false;
+        let h10 = false;
+        let h12 = false;
+        let h14 = false;
+        let h16 = false;
+        let h18 = false;
+        let h20 = false;
+  
+        dayAppointments.forEach((appointment, i) => {
+          switch (appointment.app_hour) {
+            case 8:
+              h08 = true;
+              break;
+            case 10:
+              h10 = true;
+              break;
+            case 12:
+              h12 = true;
+              break;
+            case 14:
+              h14 = true;
+              break;
+            case 16:
+              h16 = true;
+              break;
+            case 18:
+              h18 = true;
+              break;
+            case 20:
+              h20 = true;
+              break;
+          }
+        });
+  
+        const avaliability = {
+          h08: h08,
+          h10: h10,
+          h12: h12,
+          h14: h14,
+          h16: h16,
+          h18: h18,
+          h20: h20,
+        }
+        console.log(avaliability);
+        res.render("avaliability", {availability: avaliability, date:date});
       }
-    } else {
+
+    }else {
       res.redirect("/appointment");
     }
+
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-//Route for the Admin to Create Services
 router.get('/lady-lash-admin-homepage/service', (req, res) => {
   res.render('createService.handlebars');
 });
