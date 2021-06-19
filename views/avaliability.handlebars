@@ -1,47 +1,59 @@
 
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script>
-        $( function() {
-          $( "#datepicker" ).datepicker();
-        } );
-</script>
-
-
-     <span class="myDate">Select a date: <input type="text" id="datepicker"></span>
-
+<form  id="myDate" action="/avaliability" method="get"class="form">
+        <div  class="form-group form-floating mb-3 col-3">
+          <div> Please select a date for your appointment:</div>
+          <input name="app_date" class="form-input form-control col-6" type ="text" id ="datepicker-4" />
+          <button class="btn btn-primary" type="submit" id="app-date">Check availability</button>
+        </div>
+</form>
+<section>
+  <h5>Date: {{date}}</h5>
+</section>
 
     <div>
      <div class="list-group">
-      {{#if h08}}
+      {{#if availability.h08}}
       {{else}}
       <a href="/login" type="button" class="list-group-item list-group-item-action">08.00 AM   Please click here to make an appointment</a>
       {{/if}}
-      {{#if h10}}
+      {{#if availability.h10}}
       {{else}}
       <a href="/login" type="button" class="list-group-item list-group-item-action">10.00 AM   Please click here to make an appointment</a>
       {{/if}}
-      {{#if h12}}
+      {{#if availability.h12}}
       {{else}}
       <a href="/login" type="button" class="list-group-item list-group-item-action">12.00 PM   Please click here to make an appointment</a>
       {{/if}}
-      {{#if h14}}
+      {{#if availability.h14}}
       {{else}}
       <a href="/login" type="button" class="list-group-item list-group-item-action">2.00 PM    Please click here to make an appointment</a>
       {{/if}}
-      {{#if h16}}
+      {{#if availability.h16}}
       {{else}}
       <a href="/login" type="button" class="list-group-item list-group-item-action">4.00 PM    Please click here to make an appointment</a>
       {{/if}}
-      {{#if h18}}
+      {{#if availability.h18}}
       {{else}}
       <a href="/login" type="button" class="list-group-item list-group-item-action">6.00 PM    Please click here to make an appointment</a>
       {{/if}}
-      {{#if h20}}
+      {{#if availability.h20}}
       {{else}}
       <a href="/login" type="button" class="list-group-item list-group-item-action">8.00 PM    Please click here to make an appointment for AFTER HOURS</a>
       {{/if}}
     </div>
 
     
-  
+   <script>
+        $(function() {
+           $( "#datepicker-4" ).datepicker({
+              dateFormat:"yy-mm-dd",
+              dateField: "#datepicker-4",
+              beforeShowDay : function (date) {
+                 var dayOfWeek = date.getDay ();
+                 // 0 : Sunday, 1 : Monday, ...
+                 if (dayOfWeek == 0 || dayOfWeek == 6) return [false];
+                 else return [true];
+                }
+              });
+            });
+</script>
