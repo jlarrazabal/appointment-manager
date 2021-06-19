@@ -21,7 +21,7 @@ Calendar.init({
     }
   },
   hour: {
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
     allowNull: false,
   },
   duration: {
