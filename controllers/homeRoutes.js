@@ -122,6 +122,13 @@ router.get('/appointment', withAuth,  async (req, res) => {
 router.get('/appointment/date', withAuth, async (req, res) => {
   try {
     const appointmentsData = await Appointment.findAll({
+      include: {
+          model: Service,
+          attributes:["id", "name", "description", "price", "descounted_price" ],
+          
+        
+
+      },
       where: {
         app_date: req.body.app_date,
         [app_hour.not]: null,

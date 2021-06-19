@@ -14,13 +14,16 @@
       <h3>Services</h3>
     </div>
   </div>
+
+  <div>
   {{#each services.services as |service|}}
-    <div class="card">
-      <div id="services" class="card-header">
+   <span>
+    <div class="card col-3">
+      <div id="services" class="card-header card text-center ">
         <h3>{{name}}</h3>
       </div>
-      <div class="row">
-        <div class="col-sm-6">
+        <div class="row card text-center">
+        <div class="">
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Service Details</h5>
@@ -32,16 +35,22 @@
             </div>
           </div>
         </div>
-      </div>
-  {{/each}}
+      </div>  
+   </div>
+  </span>
+{{/each}}
+</div>
 </section>
 {{#if business_hours}}
   <div class="card">
     <div id="business-hours" class="card-header">
       <h3>Business Hours</h3>
+      <h4>From Monday to Friday</h4>
+      <h4>8:00am to 6:00pm</h4>
+      <h4>We also have late nigth appointments, just ask!</h4>
     </div>
     <div class="card-body">
-      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+      <p class="card-text">Please follow us on Instagram!</p>
     </div>
   </div>
 {{/if}}
