@@ -17,13 +17,13 @@ router.post('/create', withAuth, async (req, res) => {
             price: req.body.price,
             descounted_price: req.body.price*0.7,
         });
-        const serNewService = newService.get({plain: true})   
-        res.status(200).json({serNewService});
+        const serNewService = newService.get({plain: true})
+        res.render("homepage",{logged_in: req.session.logged_in, user_id: req.session.user_id});
 
     } catch (err) {
     console.log(err);
     res.status(500).json(err);
    };
-}); 
+});
 
 module.exports= router;
