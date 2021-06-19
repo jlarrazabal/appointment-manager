@@ -17,7 +17,7 @@ router.post("/create", async (req, res) => {
         service_id: req.body.service_id,
         calendar_id: req.body.calendar_id
     });
-    res.status(200).json(newAppointment);
+    res.render("userAppointments", {newAppointment});
   } catch (err) {
     res.status(500).json(err);
   }
