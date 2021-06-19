@@ -6,6 +6,8 @@ const {
   Calendar
 } = require('../models');
 const withAuth = require('../utils/auth');
+
+//Route to Get to the Homepage
 router.get("/", async (req, res) => {
   try {
     const servicesData = await Service.findAll({});
@@ -55,6 +57,8 @@ router.get("/", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+//Route for Login Page
 router.get('/login', (req, res) => {
   if (req.session.logged_in) {
     res.redirect('/');
@@ -62,12 +66,16 @@ router.get('/login', (req, res) => {
   }
   res.render('login');
 });
+
+//Route for Admin Home Page
 router.get("/lady-lash-admin-homepage", withAuth, async (req, res) => {
   try {
-    let date = "";
-    if (!req.body.app_date) {
+    // const selectedDate= req.query.app_date;
+    // console(selected);
+
+    let date = req.query.app_date;
+    if (!req.query.app_date) {
       let fullDate = new Date();
-      console.log(fullDate);
       let day = fullDate.getDate();
       let month = fullDate.getMonth() + 1;
       let year = fullDate.getFullYear();
@@ -77,11 +85,8 @@ router.get("/lady-lash-admin-homepage", withAuth, async (req, res) => {
       if (day < 10) {
         day = "0" + day;
       }
-      console.log(day, month, year);
       date = `${year}-${month}-${day}`;
       console.log(date);
-    } else {
-      console.log("Did not work");
     }
 
     const appointmentsData = await Appointment.findAll({
@@ -119,7 +124,8 @@ router.get("/lady-lash-admin-homepage", withAuth, async (req, res) => {
       res.render("adminHomepage", {
         availability: availability,
         logged_in: req.session.logged_in,
-        user_id: req.session.user_id
+        user_id: req.session.user_id,
+        date: date
       });
     } else {
       let h08 = false;
@@ -129,6 +135,13 @@ router.get("/lady-lash-admin-homepage", withAuth, async (req, res) => {
       let h16 = false;
       let h18 = false;
       let h20 = false;
+      let appointment08 = {};
+      let appointment10 = {};
+      let appointment12 = {};
+      let appointment14 = {};
+      let appointment16 = {};
+      let appointment18 = {};
+      let appointment20 = {};
 
       dayAppointments.forEach((appointment, i) => {
         switch (appointment.app_hour) {
@@ -156,6 +169,32 @@ router.get("/lady-lash-admin-homepage", withAuth, async (req, res) => {
         }
       });
 
+      dayAppointments.forEach((appointment, i) => {
+        switch (appointment.app_hour) {
+          case 8:
+            appointment08 = appointment;
+            break;
+          case 10:
+            appointment10 = appointment;
+            break;
+          case 12:
+            appointment12 = appointment;
+            break;
+          case 14:
+            appointment14 = appointment;
+            break;
+          case 16:
+            appointment16 = appointment;
+            break;
+          case 18:
+            appointment18 = appointment;
+            break;
+          case 20:
+            appointment20 = appointment;
+            break;
+        }
+      });
+
       const avaliability = {
         h08: h08,
         h10: h10,
@@ -165,7 +204,17 @@ router.get("/lady-lash-admin-homepage", withAuth, async (req, res) => {
         h18: h18,
         h20: h20,
       }
-      res.render("adminHomepage", {availability: avaliability, appointments: {dayAppointments}, logged_in: req.session.logged_in, user_id: req.session.user_id});
+
+      const appointments = {
+        appointment08: appointment08,
+        appointment10: appointment10,
+        appointment12: appointment12,
+        appointment14: appointment14,
+        appointment16: appointment16,
+        appointment18: appointment18,
+        appointment20: appointment20,
+      }
+      res.render("adminHomepage", {availability: avaliability, appointments: appointments, date: date, logged_in: req.session.logged_in, user_id: req.session.user_id});
     }
   } catch (err) {
     res.status(500).json(err);
@@ -226,7 +275,7 @@ router.get("/avaliability", async (req, res) => {
         let h20 = false;
   
         dayAppointments.forEach((appointment, i) => {
-          switch (parseInt(appointment.app_hour.toString())) {
+          switch (appointment.app_hour) {
             case 8:
               h08 = true;
               break;
@@ -273,10 +322,10 @@ router.get("/avaliability", async (req, res) => {
   }
 });
 
-
 router.get('/lady-lash-admin-homepage/service', (req, res) => {
   res.render('createService.handlebars');
 });
+
 //Route to the new appoiment page
 router.get('/appointment', withAuth, async (req, res) => {
   res.render('newAppointment.handlebars');
@@ -304,7 +353,7 @@ router.get('/appointment/date', withAuth, async (req, res) => {
       } else {
         console.log("Did not work");
       }
-  
+
       const appointmentsData = await Appointment.findAll({
         include: [{
             model: User,
@@ -320,19 +369,19 @@ router.get('/appointment/date', withAuth, async (req, res) => {
           },
         ]
       });
-      
+
       const serviceData = await Service.findAll({});
-      
+
       const services = serviceData.map(service => service.get({
         plain: true
       }));
-  
+
       const appointmentsPlain = appointmentsData.map(appointment => appointment.get({
         plain: true
       }));
-  
+
       const dayAppointments = appointmentsPlain.filter(appointment => appointment.app_date === date);
-  
+
       if (!dayAppointments.length) {
         const availability = {
           h08: false,
@@ -356,7 +405,7 @@ router.get('/appointment/date', withAuth, async (req, res) => {
         let h16 = false;
         let h18 = false;
         let h20 = false;
-  
+
         dayAppointments.forEach((appointment, i) => {
           switch (appointment.app_hour) {
             case 8:
@@ -382,7 +431,7 @@ router.get('/appointment/date', withAuth, async (req, res) => {
               break;
           }
         });
-  
+
         const avaliability = {
           h08: h08,
           h10: h10,
@@ -404,6 +453,6 @@ router.get('/appointment/date', withAuth, async (req, res) => {
     } catch (err) {
       res.status(500).json(err);
     }
-  }); 
+  });
 
 module.exports = router;
