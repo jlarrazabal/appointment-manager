@@ -216,7 +216,7 @@ router.get('/appointment', withAuth, async (req, res) => {
   res.render('newAppointment.handlebars');
 });
 
-//Route to get the appointment data
+//Route to get the available hours given the selected date
 router.get('/appointment/date', withAuth, async (req, res) => {
   try {
     const appointmentsData = await Appointment.findAll({
@@ -234,6 +234,6 @@ router.get('/appointment/date', withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 
-})
+});
 
 module.exports = router;
