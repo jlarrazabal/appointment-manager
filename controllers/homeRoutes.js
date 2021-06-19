@@ -8,6 +8,7 @@ const {
 const withAuth = require('../utils/auth');
 
 
+//Route to Get to the Homepage
 router.get("/", async (req, res) => {
   try {
     const servicesData = await Service.findAll({});
@@ -66,12 +67,15 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
+//Route for Admin Home Page
 router.get("/lady-lash-admin-homepage", withAuth, async (req, res) => {
   try {
-    let date = "";
-    if (!req.body.app_date) {
+    // const selectedDate= req.query.app_date;
+    // console(selected);
+
+    let date = req.query.app_date;
+    if (!req.query.app_date) {
       let fullDate = new Date();
-      console.log(fullDate);
       let day = fullDate.getDate();
       let month = fullDate.getMonth() + 1;
       let year = fullDate.getFullYear();
@@ -81,11 +85,8 @@ router.get("/lady-lash-admin-homepage", withAuth, async (req, res) => {
       if (day < 10) {
         day = "0" + day;
       }
-      console.log(day, month, year);
       date = `${year}-${month}-${day}`;
       console.log(date);
-    } else {
-      console.log("Did not work");
     }
 
     const appointmentsData = await Appointment.findAll({
@@ -123,7 +124,8 @@ router.get("/lady-lash-admin-homepage", withAuth, async (req, res) => {
       res.render("adminHomepage", {
         availability: availability,
         logged_in: req.session.logged_in,
-        user_id: req.session.user_id
+        user_id: req.session.user_id,
+        date: date
       });
     } else {
       let h08 = false;
@@ -133,6 +135,13 @@ router.get("/lady-lash-admin-homepage", withAuth, async (req, res) => {
       let h16 = false;
       let h18 = false;
       let h20 = false;
+      let appointment08 = {};
+      let appointment10 = {};
+      let appointment12 = {};
+      let appointment14 = {};
+      let appointment16 = {};
+      let appointment18 = {};
+      let appointment20 = {};
 
       dayAppointments.forEach((appointment, i) => {
         switch (appointment.app_hour) {
@@ -160,6 +169,32 @@ router.get("/lady-lash-admin-homepage", withAuth, async (req, res) => {
         }
       });
 
+      dayAppointments.forEach((appointment, i) => {
+        switch (appointment.app_hour) {
+          case 8:
+            appointment08 = appointment;
+            break;
+          case 10:
+            appointment10 = appointment;
+            break;
+          case 12:
+            appointment12 = appointment;
+            break;
+          case 14:
+            appointment14 = appointment;
+            break;
+          case 16:
+            appointment16 = appointment;
+            break;
+          case 18:
+            appointment18 = appointment;
+            break;
+          case 20:
+            appointment20 = appointment;
+            break;
+        }
+      });
+
       const avaliability = {
         h08: h08,
         h10: h10,
@@ -169,23 +204,54 @@ router.get("/lady-lash-admin-homepage", withAuth, async (req, res) => {
         h18: h18,
         h20: h20,
       }
-      res.render("adminHomepage", {availability: avaliability, appointments: {dayAppointments}, logged_in: req.session.logged_in, user_id: req.session.user_id});
+
+      const appointments = {
+        appointment08: appointment08,
+        appointment10: appointment10,
+        appointment12: appointment12,
+        appointment14: appointment14,
+        appointment16: appointment16,
+        appointment18: appointment18,
+        appointment20: appointment20,
+      }
+      res.render("adminHomepage", {availability: avaliability, appointments: appointments, date: date, logged_in: req.session.logged_in, user_id: req.session.user_id});
     }
   } catch (err) {
     res.status(500).json(err);
   }
 });
+
 //Avaliability GET
 router.get("/avaliability", async (req, res) => {
   try {
-    const appointmentData = await Appointment.findAll({
-      include: [{
-        model: Calendar,
-        attributes: ["id", "day", "hour", "start_date", "end_date"]
-      }]
-    });
-    if (!req.session.logged_in) {
-      if (!appointmentData.length) {
+    let date = req.query.app_date;
+    if (!req.query.app_date) {
+      let fullDate = new Date();
+      console.log(fullDate);
+      let day = fullDate.getDate();
+      let month = fullDate.getMonth() + 1;
+      let year = fullDate.getFullYear();
+      if (month < 10) {
+        month = "0" + month;
+      }
+      if (day < 10) {
+        day = "0" + day;
+      }
+      console.log(day, month, year);
+      date = `${year}-${month}-${day}`;
+      console.log(date);
+    } 
+
+    const appointmentsData = await Appointment.findAll({});
+
+    const appointmentsPlain = appointmentsData.map(appointment => appointment.get({
+      plain: true
+    }));
+
+    const dayAppointments = appointmentsPlain.filter(appointment => appointment.app_date === date);
+    console.log(dayAppointments);
+    if(!req.session.logged_in){
+      if (!dayAppointments.length) {
         const availability = {
           h08: false,
           h10: false,
@@ -193,18 +259,69 @@ router.get("/avaliability", async (req, res) => {
           h14: false,
           h16: false,
           h18: false,
-          h20: false,
-          h22: false,
+          h20: false
         };
-        res.render("avaliability", availability);
+        res.render("avaliability", {
+          availability: availability,
+          date: date
+        });
+      } else {
+        let h08 = false;
+        let h10 = false;
+        let h12 = false;
+        let h14 = false;
+        let h16 = false;
+        let h18 = false;
+        let h20 = false;
+  
+        dayAppointments.forEach((appointment, i) => {
+          switch (appointment.app_hour) {
+            case 8:
+              h08 = true;
+              break;
+            case 10:
+              h10 = true;
+              break;
+            case 12:
+              h12 = true;
+              break;
+            case 14:
+              h14 = true;
+              break;
+            case 16:
+              h16 = true;
+              break;
+            case 18:
+              h18 = true;
+              break;
+            case 20:
+              h20 = true;
+              break;
+          }
+        });
+  
+        const avaliability = {
+          h08: h08,
+          h10: h10,
+          h12: h12,
+          h14: h14,
+          h16: h16,
+          h18: h18,
+          h20: h20,
+        }
+        console.log(avaliability);
+        res.render("avaliability", {availability: avaliability, date:date});
       }
-    } else {
+
+    }else {
       res.redirect("/appointment");
     }
+
   } catch (err) {
     res.status(500).json(err);
   }
 });
+
 router.get('/lady-lash-admin-homepage/service', (req, res) => {
   res.render('createService.handlebars');
 });
@@ -256,9 +373,9 @@ router.get('/appointment/date', withAuth, async (req, res) => {
           },
         ]
       });
-      
+
       const serviceData = await Service.findAll({});
-      
+
       const services = serviceData.map(service => service.get({
         plain: true
       }));
@@ -268,9 +385,9 @@ router.get('/appointment/date', withAuth, async (req, res) => {
       const appointmentsPlain = appointmentsData.map(appointment => appointment.get({
         plain: true
       }));
-  
+
       const dayAppointments = appointmentsPlain.filter(appointment => appointment.app_date === date);
-  
+
       if (!dayAppointments.length) {
         const availability = {
           h08: false,
@@ -296,7 +413,7 @@ router.get('/appointment/date', withAuth, async (req, res) => {
         let h16 = false;
         let h18 = false;
         let h20 = false;
-  
+
         dayAppointments.forEach((appointment, i) => {
           switch (appointment.app_hour) {
             case 8:
@@ -322,7 +439,7 @@ router.get('/appointment/date', withAuth, async (req, res) => {
               break;
           }
         });
-  
+
         const avaliability = {
           h08: h08,
           h10: h10,
@@ -340,6 +457,6 @@ router.get('/appointment/date', withAuth, async (req, res) => {
     } catch (err) {
       res.status(500).json(err);
     }
-  }); 
+  });
 
 module.exports = router;

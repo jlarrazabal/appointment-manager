@@ -1,9 +1,22 @@
 <section>
+  <form action="/lady-lash-admin-homepage" method="get"class="form signup-form">
+          <div class="form-group form-floating mb-3 col-3">
+            <p>Select date to view appointments</p>
+            <input name="app_date" class="form-input form-control col-6" type ="date"/>
+            <button class="btn btn-primary" type="submit">See Appointments</button>
+          </div>
+  </form>
+</section>
+<section>
+  <h1>{{date}}</h1>
+</section>
+<section>
   <div class="card">
     <div class="card-body">
       {{#if availability.h08}}
       <p>08:00 AM</p>
-      <p>There is a appointment at this time</p>
+      <p>Guest Name: {{appointments.appointment08.user.first_name}} {{appointments.appointment08.user.last_name}}</p>
+      <p>Service: {{appointments.appointment08.service.name}}</p>
       {{else}}
         <p>08:00 AM</p>
         <p>Open</p>
@@ -15,7 +28,8 @@
     <div class="card-body">
       {{#if availability.h10}}
       <p>10:00 AM</p>
-      <p>There is a appointment at this time</p>
+      <p>Guest Name: {{appointments.appointment10.user.first_name}} {{appointments.appointment10.user.last_name}}</p>
+      <p>Service: {{appointments.appointment10.service.name}}</p>
       {{else}}
         <p>10:00 AM</p>
         <p>Open</p>
@@ -27,7 +41,8 @@
     <div class="card-body">
       {{#if availability.h12}}
       <p>12:00 PM</p>
-      <p>There is a appointment at this time</p>
+      <p>Guest Name: {{appointments.appointment12.user.first_name}} {{appointments.appointment12.user.last_name}}</p>
+      <p>Service: {{appointments.appointment12.service.name}}</p>
       {{else}}
         <p>12:00 PM</p>
         <p>Open</p>
@@ -39,7 +54,8 @@
     <div class="card-body">
       {{#if availability.h14}}
       <p>14:00 PM</p>
-      <p>There is a appointment at this time</p>
+      <p>Guest Name: {{appointments.appointment14.user.first_name}} {{appointments.appointment14.user.last_name}}</p>
+      <p>Service: {{appointments.appointment14.service.name}}</p>
       {{else}}
         <p>14:00 PM</p>
         <p>Open</p>
@@ -51,7 +67,8 @@
     <div class="card-body">
       {{#if availability.h16}}
       <p>16:00 PM</p>
-      <p>There is a appointment at this time</p>
+      <p>Guest Name: {{appointments.appointment16.user.first_name}} {{appointments.appointment16.user.last_name}}</p>
+      <p>Service: {{appointments.appointment16.service.name}}</p>
       {{else}}
         <p>16:00 PM</p>
         <p>Open</p>
@@ -63,7 +80,8 @@
     <div class="card-body">
       {{#if availability.h18}}
       <p>18:00 PM</p>
-      <p>There is a appointment at this time</p>
+      <p>Guest Name: {{appointments.appointment18.user.first_name}} {{appointments.appointment18.user.last_name}}</p>
+      <p>Service: {{appointments.appointment18.service.name}}</p>
       {{else}}
         <p>18:00 PM</p>
         <p>Open</p>
@@ -75,7 +93,8 @@
     <div class="card-body">
       {{#if availability.h20}}
       <p>20:00 PM</p>
-      <p>There is a appointment at this time</p>
+      <p>Guest Name: {{appointments.appointment20.user.first_name}} {{appointments.appointment20.user.last_name}}</p>
+      <p>Service: {{appointments.appointment20.service.name}}</p>
       {{else}}
         <p>Open</p>
         <button type="submit" name="block-time" data-time-block:"20:00">Block Time</button>
