@@ -1,19 +1,31 @@
 <form action="/appointment/date" method="get"class="form signup-form">
         <div class="form-group form-floating mb-3 col-3">
-          <div> Please select a date for your appoiment:</div>
+          <div> Please select a date for your appointment:</div>
           <br>
           <input name="app_date" class="form-input form-control col-6" type ="text" id ="datepicker-4" />
-          <button class="btn btn-primary" type="submit">Check availability</button>
+          <button class="btn btn-primary" type="submit" id="app-date">Check availability</button>
         </div>
  </form>
+
+<div id="selected-hour">
+{{#each app_hour}}
+<span>
+  <div> 
+    <button class="btn btn-primary" data-disable-idom="true">{{notAvailable}}:00 am/pm</button>
+  </div>
+  <div> 
+    <button class="btn btn-primary" id="app_hour" data-disable-idom="false">{{availableHours}}:00 pm</button>
+  </div>
+</span>
+{{/each}}
+</div>
 
 
  <script>
         $(function() {
            $( "#datepicker-4" ).datepicker({
               dateFormat:"yy-mm-dd",
-              altField: "#datepicker-4",
-              altFormat: "DD, d MM, yy",
+              dateField: "#datepicker-4",
               beforeShowDay : function (date) {
                  var dayOfWeek = date.getDay ();
                  // 0 : Sunday, 1 : Monday, ...
