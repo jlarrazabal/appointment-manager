@@ -133,18 +133,70 @@ router.get('/appointment', withAuth,  async (req, res) => {
   res.render('newAppointment.handlebars');
 });
 
-//Route to get the appointment data
+//Route to get the available hours given the selected date
 router.get('/appointment/date', withAuth, async (req, res) => {
   try {
     const appointmentsData = await Appointment.findAll({
-      where: {app_date: req.body.app_date}
+      where: {
+        app_date: req.body.app_date,
+        [app_hour.not]: null,
+      } 
     });
     const appointments = appointmentsData.map(appointment => appointment.get({plain: true}));
-    res.status(200).json({appointments});
+    if (!appointments.length) {
+      res.status(200).json({message: "We don't have any available appointments for the selected date"});
+      return;
+    }
+    else {
+     const notAvailable=[];
+     const availableHours=[];
+     appointments.forEach(({app_hour}) => {
+      if (app_hour === 8) {
+        notAvailable.push(app_hour);
+      }
+      else {
+        availableHours.push(8);
+      }
+      //
+      if (app_hour === 10) {
+        notAvailable.push(app_hour);
+      }
+      else {
+        availableHours.push(10);
+      }
+      //
+      if (app_hour === 12) {
+        notAvailable.push(app_hour);
+      }
+      else {
+        availableHours.push(12);
+      }
+      //
+      if (app_hour === 2) {
+        notAvailable.push(app_hour);
+      }
+      else {
+        availableHours.push(2);
+      }
+      //
+      if (app_hour === 4) {
+        notAvailable.push(app_hour);
+      }
+      else {
+        availableHours.push(4);
+      }
+      //
+      if (app_hour === 6) {
+        notAvailable.push(app_hour);
+      }
+      else {
+        availableHours.push(6);
+      }
+      })
+      res.status(200).json({notAvailable}, {availableHours});
+    }  
   } catch(err) {
     res.status(500).json(err);
-  }
-
-} )
+  }})
 
 module.exports = router;
