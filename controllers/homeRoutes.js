@@ -6,7 +6,6 @@ const {
   Calendar
 } = require('../models');
 const withAuth = require('../utils/auth');
-
 router.get("/", async (req, res) => {
   try {
     const servicesData = await Service.findAll({});
@@ -56,7 +55,6 @@ router.get("/", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
 router.get('/login', (req, res) => {
   if (req.session.logged_in) {
     res.redirect('/');
@@ -64,7 +62,6 @@ router.get('/login', (req, res) => {
   }
   res.render('login');
 });
-
 router.get("/lady-lash-admin-homepage", withAuth, async (req, res) => {
   try {
     let date = "";
@@ -174,7 +171,6 @@ router.get("/lady-lash-admin-homepage", withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
-
 //Avaliability GET
 router.get("/avaliability", async (req, res) => {
   try {
@@ -199,18 +195,15 @@ router.get("/avaliability", async (req, res) => {
         res.render("avaliability", availability);
       }
     } else {
-      res.redirect("/create-appointment");
+      res.redirect("/appointment");
     }
   } catch (err) {
     res.status(500).json(err);
   }
 });
-
 router.get('/lady-lash-admin-homepage/service', (req, res) => {
   res.render('createService.handlebars');
 });
-
-
 //Route to the new appoiment page
 router.get('/appointment', withAuth, async (req, res) => {
   res.render('newAppointment.handlebars');
