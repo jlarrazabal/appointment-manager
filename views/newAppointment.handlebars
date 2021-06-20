@@ -1,68 +1,82 @@
-<form action="/appointment/date" method="get"class="form signup-form">
+{{#if logged_in}}
+    <script src="/js/logout.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      if (window.location.pathname === "/api/users/login" || window.location.pathname === "/api/users/signup") {
+        location.replace("/");
+      }
+    </script>
+  {{/if}}
+
+<form action="/appointment/date" method="get" class="form signup-form">
         <div class="form-group form-floating mb-3 col-3">
           <div> Please select a date for your appointment:</div>
           <br>
           <input name="app_date" class="form-input form-control col-6" type ="text" id ="datepicker-4" />
-          <button class="btn btn-primary" type="submit" id="app-date">Check availability</button>
+          <button class="btn btn-primary" type="submit" id="app-date-btn">Check availability</button>
         </div>
 </form>
 
 {{#if showOptions}}
-<div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="btn btn-primary" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-  Please select a service:
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-    {{#each services as |service|}}
-    <li><a class="dropdown-item" id="service">{{name}}</a></li>
-    {{/each}}
-  </ul>
+
+<form>
+
+<div id="services" class="dropdown">
+ <label for="service">Please select a service</label>
+  <select name="service" id="service">
+  {{#each services.services as |service|}}
+  <option id="service" value={{service.name}} >{{service.name}}</option>
+  {{/each}}
+  </select>
 </div>
 
-
 <div class="dropdown" id="selected-hour">
-  <button class="btn btn-secondary dropdown-toggle" type="btn btn-primary" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-  Please select a time
-  </button>
-  <select id="cars" name="cars" class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+  <label for="service">Please select a time</label>
+  <select id="app_hour" name="app_hour">
   {{#if availability.h08}}
     {{else}}
     <option value=8 >8:00 am</option>
   {{/if}}
+
   {{#if availability.h10}}
     {{else}}
     <option value=10 >10:00 am</option>
   {{/if}}
+
   {{#if availability.h12}}
     {{else}}
     <option value=12 >12:00 pm</option>
   {{/if}}
+
   {{#if availability.h14}}
     {{else}}
     <option value=14 >2:00 pm</option>
   {{/if}}
+
   {{#if availability.h16}}
     {{else}}
     <option value=16 >4:00 pm</option>
   {{/if}}
+
   {{#if availability.h18}}
     {{else}}
     <option value=18 >6:00 pm</option>
   {{/if}}
+
   {{#if availability.h20}}
     {{else}}
     <option value=20 >8:00 pm</option>
   {{/if}}
-</select>
+ </select>
 </div>
-{{else}}
 
+{{else}}
 {{/if}}
 
+</form>
 
+<br>
 
-
-
+<a id="submitApp" href="/api/appointment/create"> Confirm appointment!</a>
 
 
  <script>
@@ -79,3 +93,6 @@
               });
             });
 </script>
+
+
+<script src="/js/newAppoiment.js"></script>

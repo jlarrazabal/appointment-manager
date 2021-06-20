@@ -7,6 +7,7 @@ const {
 } = require('../models');
 const withAuth = require('../utils/auth');
 
+
 //Route to Get to the Homepage
 router.get("/", async (req, res) => {
   try {
@@ -58,7 +59,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-//Route for Login Page
 router.get('/login', (req, res) => {
   if (req.session.logged_in) {
     res.redirect('/');
@@ -334,8 +334,8 @@ router.get('/appointment', withAuth, async (req, res) => {
 //Route to get the available hours given the selected date
 router.get('/appointment/date', withAuth, async (req, res) => {
     try {
-      let date = "";
-      if (!req.body.app_date) {
+      let date = req.query.app_date;
+      if (!req.query.app_date) {
         let fullDate = new Date();
         console.log(fullDate);
         let day = fullDate.getDate();
@@ -350,9 +350,13 @@ router.get('/appointment/date', withAuth, async (req, res) => {
         console.log(day, month, year);
         date = `${year}-${month}-${day}`;
         console.log(date);
-      } else {
-        console.log("Did not work");
       }
+  
+      let showOptions= true;
+
+        if (!req.query.app_date) {
+         showOptions = false;
+        }
 
       const appointmentsData = await Appointment.findAll({
         include: [{
@@ -376,6 +380,8 @@ router.get('/appointment/date', withAuth, async (req, res) => {
         plain: true
       }));
 
+      console.log(services);
+  
       const appointmentsPlain = appointmentsData.map(appointment => appointment.get({
         plain: true
       }));
@@ -393,9 +399,11 @@ router.get('/appointment/date', withAuth, async (req, res) => {
           h20: false
         };
         res.render("newAppointment", {
+          services: {services},
           availability: availability,
           logged_in: req.session.logged_in,
-          user_id: req.session.user_id
+          user_id: req.session.user_id,
+          showOptions: showOptions,
         });
       } else {
         let h08 = false;
@@ -441,14 +449,10 @@ router.get('/appointment/date', withAuth, async (req, res) => {
           h18: h18,
           h20: h20,
         }
-
-        let showOptions= true;
-
-        if (!req.body.app_date) {
-         showOptions = false;
-        }
+        
         console.log(req.body.app_date);
-        res.render("newAppointment", {services: {services}, showOptions: showOptions, availability: avaliability, appointments: {dayAppointments}, logged_in: req.session.logged_in, user_id: req.session.user_id});
+
+        res.render("newAppointment", {services : {services}, showOptions: showOptions, availability: avaliability, appointments: {dayAppointments}, logged_in: req.session.logged_in, user_id: req.session.user_id});
       }
     } catch (err) {
       res.status(500).json(err);
