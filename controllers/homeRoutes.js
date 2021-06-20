@@ -399,6 +399,7 @@ router.get('/appointment/date', withAuth, async (req, res) => {
           h20: false
         };
         res.render("newAppointment", {
+          date: date,
           services: {services},
           availability: availability,
           logged_in: req.session.logged_in,
@@ -452,7 +453,7 @@ router.get('/appointment/date', withAuth, async (req, res) => {
         
         console.log(req.body.app_date);
 
-        res.render("newAppointment", {services : {services}, showOptions: showOptions, availability: avaliability, appointments: {dayAppointments}, logged_in: req.session.logged_in, user_id: req.session.user_id});
+        res.render("newAppointment", {date: date, services: {services}, showOptions: showOptions, availability: avaliability, appointments: {dayAppointments}, logged_in: req.session.logged_in, user_id: req.session.user_id});
       }
     } catch (err) {
       res.status(500).json(err);
