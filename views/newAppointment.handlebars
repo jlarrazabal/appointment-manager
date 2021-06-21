@@ -1,12 +1,3 @@
-{{#if logged_in}}
-    <script src="/js/logout.js" charset="utf-8"></script>
-    <script type="text/javascript">
-      if (window.location.pathname === "/api/users/login" || window.location.pathname === "/api/users/signup") {
-        location.replace("/");
-      }
-    </script>
-  {{/if}}
-
 <form action="/appointment/date" method="get" class="form signup-form">
         <div class="form-group form-floating mb-3 col-3">
           <div> Please select a date for your appointment:</div>
@@ -18,13 +9,15 @@
 
 {{#if showOptions}}
 
-<form>
+<form action="/api/appointment/create" method="post">
+<label for="date">Appointment Date</label>
+<input tyep="date" name="app_date" value={{date}} id="date">
 
 <div id="services" class="dropdown">
  <label for="service">Please select a service</label>
   <select name="service" id="service">
   {{#each services.services as |service|}}
-  <option id="service" value={{service.name}} >{{service.name}}</option>
+  <option id="service" value="{{service.name}}" >{{service.name}}</option>
   {{/each}}
   </select>
 </div>
@@ -72,12 +65,9 @@
 {{else}}
 {{/if}}
 
+<button class="btn btn-primary" type="submit" name="button">Book Appointment</button>
+
 </form>
-
-<br>
-
-<a id="submitApp" href="/api/appointment/create"> Confirm appointment!</a>
-
 
  <script>
         $(function() {
@@ -94,5 +84,12 @@
             });
 </script>
 
+{{#if logged_in}}
+    <script type="text/javascript">
+      if (window.location.pathname === "/api/users/login" || window.location.pathname === "/api/users/signup") {
+        location.replace("/");
+      }
+    </script>
+  {{/if}}
 
-<script src="/js/newAppoiment.js"></script>
+<!-- <script src="/js/newAppoiment.js"></script> -->
