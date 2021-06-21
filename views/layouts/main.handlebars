@@ -35,6 +35,11 @@
               <li class="nav-item">
                 <a class="nav-link" href="/avaliability">Avaliability</a>
               </li>
+                {{#if logged_in}}
+                  <li class="nav-item">
+                  <a class="nav-link" href="/my-appointment">My Appointments</a>
+                  </li>
+                {{/if}}
               <li class="nav-item">
                 <a class="nav-link" href="/#about-us">About Us</a>
               </li>
@@ -83,7 +88,7 @@
   {{#if logged_in}}
     <script src="/js/logout.js" charset="utf-8"></script>
     <script type="text/javascript">
-      if (window.location.pathname === "/api/users/login" || window.location.pathname === "/api/users/signup" || window.location.pathname === "/api/service/create" ) {
+      if (window.location.pathname === "/api/users/login" || window.location.pathname === "/api/users/signup" || window.location.pathname === "/api/service/create" || window.location.pathname === "/api/appointment/create") {
         location.replace("/");
       }
     </script>
