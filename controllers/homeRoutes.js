@@ -540,4 +540,8 @@ router.get('/my-appointment', withAuth, async (req, res) => {
   }
 });
 
+router.get('/checkout', withAuth, async (req, res) => {
+  res.render("checkout", {logged_in: req.session.logged_in, user_id: req.session.user_id, appointment_id: req.session.appointment_id});
+});
+
 module.exports = router;
