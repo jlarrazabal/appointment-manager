@@ -3,7 +3,7 @@
   padding: 5px;
   margin: 0;
   border-radius: 10px;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 header, .project:not(:last-child) {
@@ -52,5 +52,18 @@ header, .project:not(:last-child) {
 
 #askQ {
   font-style: oblique;
+}
+ .card.col-3 {
+  display: -webkit-inline-flex;
+ }
+
+/* for the font-family */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+.brandTitle {
+  font-style: italic;
+  font-family:'Dancing Script', sans-serif  ;
+  font-weight: bolder;
+  font-size: xx-large;
+  color: black ;
 }
 
