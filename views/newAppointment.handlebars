@@ -1,10 +1,9 @@
-<form action="/appointment/date" method="get" class="form signup-form">
-        <div class="form-group form-floating mb-3 col-3">
+<form action="/appointment/date" method="get" class="form signup-form date">
+        <div class="form-group form-floating mb-3 col-12">
           <div> Please select a date for your appointment:</div>
-          <br>
           <label for="datepicker-4"></label>
-          <input name="app_date" class="form-input form-control col-6" type ="text" id ="datepicker-4" />
-          <button class="btn btn-primary" type="submit" id="app-date-btn">Check availability</button>
+          <input name="app_date" class="text-center form-input form-control col-3 date-input" type ="text" id ="datepicker-4" />
+          <button class="btn btn-primary " type="submit" id="app-date-btn">Check availability</button>
         </div>
 </form>
 
@@ -13,7 +12,7 @@
 
 <form action="/api/appointment/create" method="post">
 <label for="date">Appointment Date</label>
-<input tyep="date" name="app_date" value={{date}} id="date">
+<input type="date" name="app_date" value={{date}} id="date">
 
 <div id="services" class="dropdown">
  <label for="service">Please select a service</label>
@@ -26,7 +25,7 @@
 
 <h1 id="app_date" value={{service.price}}>{{service.price}}</h1>
 
-<div class="dropdown" id="selected-hour">
+<div class="text-center dropdown" id="selected-hour">
   <label for="app_hour">Please select a time</label>
   <select id="app_hour" name="app_hour">
   {{#if availability.h08}}
@@ -69,7 +68,7 @@
 {{else}}
 {{/if}}
 
-<button class="btn btn-primary" type="submit" name="button">Book Appointment</button>
+<button class="btn btn-primary " type="submit" name="button">Book Lashes!</button>
 
 </form>
 

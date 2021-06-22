@@ -3,14 +3,18 @@
   padding: 5px;
   margin: 0;
   border-radius: 10px;
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  
+  /* font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
 }
 
+.color {
+ background-color: lavenderblush;
+}
 header, .project:not(:last-child) {
   border-bottom: 1px solid #ccc;
 }
 
-.no-button {
+/* .no-button {
   background: none;
   border: none;
   padding: 0;
@@ -18,21 +22,15 @@ header, .project:not(:last-child) {
   color: #1b89bc;
   text-decoration: none;
   font-size: 100%;
-}
+} */
 
 .no-button:hover {
   color: #065b83;
   text-decoration: underline;
 }
 
-.dollar-amount {
-  color: #056605;
-  font-weight: bold;
-  margin-left: -5px;
-}
-
 .card-img-top {
-  max-height: 400px;
+  max-height: 500px;
 }
 
 .list-group {
@@ -50,16 +48,16 @@ header, .project:not(:last-child) {
   text-align:left;
 }
 
-#askQ {
+#askQ , .special {
   font-style: oblique;
 }
- .card.col-3 {
+ .col-3 {
   display: -webkit-inline-flex;
  }
 
 /* for the font-family */
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
-.brandTitle {
+.brandTitle, .date, .about-us, .services, .business-hours, #contact-us {
   font-style: italic;
   font-family:'Dancing Script', sans-serif  ;
   font-weight: bolder;
@@ -67,3 +65,24 @@ header, .project:not(:last-child) {
   color: black ;
 }
 
+.center {
+  display: block;
+  margin-left: 440px;
+};
+
+.date {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+h5, p {
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+  font-size: medium;
+};
+
+.about-us-main {
+  position: absolute;
+  margin-top: -150%;
+}
