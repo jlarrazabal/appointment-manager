@@ -94,7 +94,7 @@
   {{#if logged_in}}
     <script src="/js/logout.js" charset="utf-8"></script>
     <script type="text/javascript">
-      if (window.location.pathname === "/api/users/login" || window.location.pathname === "/api/users/signup" || window.location.pathname === "/api/service/create" || window.location.pathname === "/api/appointment/create") {
+      if (window.location.pathname === "/api/users/login" || window.location.pathname === "/api/users/signup" || window.location.pathname === "/api/service/create") {
         location.replace("/");
       }
     </script>

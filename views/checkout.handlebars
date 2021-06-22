@@ -1,12 +1,15 @@
-<form action="your-server-side-code" method="POST">
-  <script
-    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-    data-key="pk_test_JYkoM8sdvfbJHB23432IBphI4jw"
-    data-amount="999"
-    data-name="Stripe.com"
-    data-description="Example charge"
-    data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-    data-locale="auto"
-    data-zip-code="true">
+<section class="card">
+  <form action="/api/appointment/create-checkout-session" method="POST" class="card-body">
+  <input type="text" name="service" value="{{service.name}}" readonly>
+  <input type="number" name="price" value="{{service.price}}" readonly>
+  <button type="submit" name="button">Pay with Card</button>
+  </form>
+</section>
+{{#if logged_in}}
+  <script src="/js/logout.js" charset="utf-8"></script>
+  <script type="text/javascript">
+    if (window.location.pathname === "/api/appointment/create") {
+      location.replace("/checkout");
+    }
   </script>
-</form>
+{{/if}}

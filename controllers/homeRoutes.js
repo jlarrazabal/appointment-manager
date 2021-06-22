@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const stripe = require('stripe')(process.env.STRIPE_TEST_KEY);
 const {
   User,
   Appointment,
@@ -331,8 +332,8 @@ router.get('/avaliability', async (req, res) => {
   }
 });
 
-router.get('/lady-lash-admin-homepage/service', (req, res) => {
-  res.render('createService.handlebars');
+router.get('/lady-lash-admin-homepage/service', withAuth, (req, res) => {
+  res.render('createService.handlebars', {logged_in: req.session.logged_in, user_id: req.session.user_id});
 });
 
 //Route to the new appoiment page
@@ -541,7 +542,31 @@ router.get('/my-appointment', withAuth, async (req, res) => {
 });
 
 router.get('/checkout', withAuth, async (req, res) => {
-  res.render("checkout", {logged_in: req.session.logged_in, user_id: req.session.user_id, appointment_id: req.session.appointment_id});
+  console.log(req.session.appointment);
+  if(req.session.payment_id) {
+    const session = await stripe.checkout.sessions.retrieve(req.session.payment_id);
+    if(session.payment_status === "paid") {
+      res.render("payment-success", {logged_in: req.session.logged_in, user_id: req.session.user_id});
+    } else {
+      res.render("payment-failure", {logged_in: req.session.logged_in, user_id: req.session.user_id});
+    }
+  } else {
+    const serviceData = await Service.findOne({where: {id: req.session.appointment.service_id}});
+
+    const service = serviceData.get({plain: true});
+
+    console.log(service);
+
+    res.render("checkout", {service: service, logged_in: req.session.logged_in, user_id: req.session.user_id});
+  }
+});
+
+router.get('/payment-success', withAuth, (req, res) => {
+  res.render('payment-success', {logged_in: req.session.logged_in, user_id: req.session.user_id});
+});
+
+router.get('/payment-failure', withAuth, (req, res) => {
+  res.render('payment-failure', {logged_in: req.session.logged_in, user_id: req.session.user_id});
 });
 
 module.exports = router;
