@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const stripe = require('stripe')(process.env.STRIPE_TEST_KEY);
+// console.log(process.env.STRIPE_TEST_KEY);
 const {
   User,
   Appointment,
@@ -40,33 +41,41 @@ router.post("/create", withAuth, async (req, res) => {
 
     req.session.appointment = newAppointment;
 
-    res.render("userAppointments", {logged_in: req.session.logged_in, user_id: req.session.user_id, appointment: req.session.appointment_id});
+    res.render("checkout", {logged_in: req.session.logged_in, user_id: req.session.user_id, appointment: req.session.appointment});
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
 router.post('/create-checkout-session', async (req, res) => {
-  const session = await stripe.checkout.sessions.create({
-    payment_method_types: ['card'],
-    line_items: [
-      {
-        price_data: {
-          currency: 'usd',
-          product_data: {
-            name: 'T-shirt',
-          },
-          unit_amount: 2000,
+  // res.send(req.body);
+  try{
+    const price = await stripe.prices.create({
+        unit_amount: parseInt(req.body.price)*100,
+        currency: 'usd',
+        product_data: {
+            name:req.body.service
         },
-        quantity: 1,
-      },
-    ],
-    mode: 'payment',
-    success_url: 'https://example.com/success',
-    cancel_url: 'https://example.com/cancel',
-  });
-
-  res.json({ id: session.id });
+      });
+    console.log(price)
+    const session = await stripe.checkout.sessions.create({
+        success_url: 'http://localhost:3001/checkout',
+        cancel_url: 'https://example.com/cancel',
+        payment_method_types: ['card'],
+        line_items: [
+          {
+            price:price.id,quantity:1
+          }
+        ],
+        mode: 'payment',
+      });
+      console.log(session)
+    // res.json({ id: session.id });
+    req.session.payment_id = session.id,
+    res.redirect(session.url);
+  } catch(err){
+    res.status(500).json(err);
+  }
 });
 
 module.exports = router;
