@@ -981,7 +981,7 @@ a:hover {
   border: 1px solid transparent;
   outline: none;
   color: #1a1a1a;
-  background-color: #aeaeae;
+  background-color:lavenderblush;
   transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
 }
 
@@ -1010,8 +1010,10 @@ a:hover {
 }
 
 .btn.btn-primary {
-  background-color: #970892;
-  color: #d9e9e8;
+  background-color:lavenderblush;
+  color:black;
+  border-color: lavenderblush;
+  font-weight: bold;
 }
 
 .btn.btn-primary:hover {
@@ -1085,9 +1087,7 @@ a:hover {
 
 .card {
   border: 1px solid #1a1a1a;
-  margin-bottom: 1rem;
-  
-  
+  margin-bottom: 1rem; 
 }
 
 
@@ -1096,8 +1096,8 @@ a:hover {
   
   box-sizing: content-box;
   text-align: center;
-  background-color: #D82CD3;
-  color:white;
+  background-color:lavenderblush;
+  color: black;
 
 }
 
@@ -1108,6 +1108,12 @@ a:hover {
   color:black;
 }
 
+.myform {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  
+}
 .card .card-body {
   padding: 0.375rem;
 }
@@ -1131,13 +1137,20 @@ form {
 
 form .form-group {
   display: block;
-  width: 100%;
-  margin: 0.625rem 0;
+  align-content: center;
+  flex-direction: column;
+  width: 100%; 
+  /* margin: 0.625rem 0; */
 }
 
 form .form-input,
 form .form-textarea {
-  display: block;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  max-width: 25%;
+  text-align: center;
+  
 }
 
 form select {
@@ -1169,6 +1182,7 @@ form .form-input {
 
 form .form-input.form-input-squared {
   border-radius: 0;
+  text-align: center;
 }
 
 form [type='checkbox'],
@@ -1295,27 +1309,27 @@ form [type='radio'] {
   max-width: 16.66667%;
 }
 
-.col-3 {
+/* .col-3 {
   flex: 0 0 25%;
   max-width: 25%;
   flex-wrap: wrap;
 
-}
+} */
 
-.col-4 {
+/* .col-4 {
   flex: 0 0 33.33333%;
   max-width: 33.33333%;
-}
+} */
 
 .col-5 {
   flex: 0 0 41.66667%;
   max-width: 41.66667%;
 }
 
-.col-6 {
+/* .col-6 {
   flex: 0 0 50%;
   max-width: 50%;
-}
+} */
 
 .col-7 {
   flex: 0 0 58.33333%;

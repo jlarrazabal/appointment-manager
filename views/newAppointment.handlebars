@@ -1,9 +1,10 @@
-<form action="/appointment/date" method="get" class="form signup-form date">
-        <div class="form-group form-floating mb-3 col-12">
+<section class="row date-form text-center col-4">
+<form action="/appointment/date" method="get" class="form signup-form date text-center">
+        <div class="form-group form-floating mb-3 ">
           <div> Please select a date for your appointment:</div>
           <label for="datepicker-4"></label>
-          <input name="app_date" class="text-center form-input form-control col-3 date-input" type ="text" id ="datepicker-4" />
-          <button class="btn btn-primary " type="submit" id="app-date-btn">Check availability</button>
+          <input name="app_date" class="text-center form-input form-group form-control date-input" type ="text" id ="datepicker-4" />
+          <button class="btn btn-primary col-6 " type="submit" id="app-date-btn">Check availability</button>
         </div>
 </form>
 
@@ -68,7 +69,7 @@
 {{else}}
 {{/if}}
 
-<button class="btn btn-primary " type="submit" name="button">Book Lashes!</button>
+<button class="btn btn-primary col-4" type="submit" name="button">Book Lashes!</button>
 
 </form>
 
@@ -94,5 +95,9 @@
       }
     </script>
   {{/if}}
+
+
+</section>
+
 
 <!-- <script src="/js/newAppoiment.js"></script> -->

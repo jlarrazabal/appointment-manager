@@ -3,6 +3,7 @@
   padding: 5px;
   margin: 0;
   border-radius: 10px;
+  color: black;
   
   /* font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
 }
@@ -31,6 +32,7 @@ header, .project:not(:last-child) {
 
 .card-img-top {
   max-height: 500px;
+  /* position: absolute; */
 }
 
 .list-group {
@@ -57,17 +59,12 @@ header, .project:not(:last-child) {
 
 /* for the font-family */
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
-.brandTitle, .date, .about-us, .services, .business-hours, #contact-us {
+.brandTitle, .date, .about-us, .services, .business-hours, #contact-us, .login-main {
   font-style: italic;
   font-family:'Dancing Script', sans-serif  ;
   font-weight: bolder;
   font-size: xx-large;
   color: black ;
-}
-
-.center {
-  display: block;
-  margin-left: 440px;
 };
 
 .date {
@@ -75,7 +72,7 @@ header, .project:not(:last-child) {
   justify-content: center;
   align-items: center;
   align-content: center;
-}
+};
 
 h5, p {
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
@@ -83,6 +80,40 @@ h5, p {
 };
 
 .about-us-main {
-  position: absolute;
-  margin-top: -150%;
+  position: relative;
+  margin-top: -15%;
+  /* margin-left: 150px;
+  margin-right: 0px; */
+};
+
+
+.bus-h {
+  display: flex;
+  align-items: center;
+  align-content: center;
+
+};
+
+.business-hours {
+  color: black;
+}
+
+.service-border {
+  border-color: lavenderblush;
+  padding-left: -10px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.borders {
+  border-color:transparent;
+};
+
+.date-form {
+ display: flex;
+ flex-direction: column;
+ align-content: center;
+ justify-items: center;
 }
