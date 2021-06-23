@@ -11,7 +11,7 @@
 
 <section>
   {{!-- <div class="text-center card row color"> --}}
-    <div class="borders card-header services text-center col-12">
+    <div class="borders card-header services text-center col-12 color">
       <h2>Services</h2>
     </div>
     <br>
@@ -20,7 +20,7 @@
    <span>
     <div class="card col-3 text-center ">
       <div id="services" class="card-header text-center service-border ">
-        <h5 href="/appointment" class="business-hours">{{name}}</h5>
+        <h5 href="/appointment" class="business-hours color">{{name}}</h5>
       </div>
         {{!-- <div class=""> --}}
         {{!-- <div class="row card text-center"> --}}
@@ -33,7 +33,7 @@
               <h5 class="card-text special">*Offered after every five purchases.</h5>  
             </div>
           {{!-- </div> --}}
-          <a href="/appointment" class="btn btn-primary">Book Lashes!</a>
+          <a href="/appointment" class="btn btn-outline-secondary">Book Lashes!</a>
         {{!-- </div> --}}
       {{!-- </div>   --}}
    </div>
@@ -47,7 +47,7 @@
 {{#if business_hours}}
   <div class="text-center col-12 card borders bus-h ">
    <div>
-     <h3 class="card-header borders business-hours">Business Hours</h3>
+     <h3 class="card-header borders business-hours color">Business Hours</h3>
    </div>
     <div id="business-hours" class="col-12">
       <h5>From Monday to Friday</h5>

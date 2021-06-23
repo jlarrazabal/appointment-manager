@@ -37,7 +37,8 @@ header, .project:not(:last-child) {
 
 .list-group {
   display:inline-block;
-  margin: 50px;
+  margin: 1rem;
+  margin-top: 0.5rem;
   border-radius: 15px;
 }
 
@@ -116,4 +117,30 @@ h5, p {
  flex-direction: column;
  align-content: center;
  justify-items: center;
-}
+};
+
+.color {
+  background-color:lavenderblush;
+};
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-items: center;
+  flex-wrap: wrap;
+  width: 30%;
+ };
+
+ .form-control {
+  width: 20px;
+ };
+
+ .avail-margin {
+  padding: 0;
+  padding-bottom: 0.5rem;
+ };
+
+ .center-input {
+   text-align: center;
+ }

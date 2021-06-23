@@ -859,7 +859,7 @@ a:hover {
   padding-bottom: 1.625rem;
 }
 
-.text-uppercase {
+/* .text-uppercase {
   text-transform: uppercase !important;
 }
 
@@ -889,8 +889,8 @@ a:hover {
 
 .text-danger {
   color: #e64c66 !important;
-}
-
+} */
+/* 
 .text-default {
   color: #aeaeae !important;
 }
@@ -967,7 +967,7 @@ a:hover {
 
 .display-flex {
   display: flex !important;
-}
+} */
 
 .btn {
   text-align: center;
