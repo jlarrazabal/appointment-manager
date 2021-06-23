@@ -57,6 +57,9 @@ header, .project:not(:last-child) {
   display: -webkit-inline-flex;
  }
 
+ 
+
+
 /* for the font-family */
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
 .brandTitle {
