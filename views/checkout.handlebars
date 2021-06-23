@@ -2,7 +2,7 @@
   <form action="/api/appointment/create-checkout-session" method="POST" class="card-body">
   <input type="text" name="service" value="{{service.name}}" readonly>
   <input type="number" name="price" value="{{service.price}}" readonly>
-  <button type="submit" name="button">Pay with Card</button>
+  <button class="btn btn-outline-secondary" type="submit" name="button">Pay with Card</button>
   </form>
 </section>
 {{#if logged_in}}
