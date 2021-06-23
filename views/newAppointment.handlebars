@@ -1,9 +1,16 @@
-<form action="/appointment/date" method="get" class="form signup-form date">
-        <div class="form-group form-floating mb-3 col-12">
+<section class="text-center">
+<form action="/appointment/date" method="get" class="form signup-form date text-center">
+        <div class="form-group form-floating mb-3">
           <div> Please select a date for your appointment:</div>
           <label for="datepicker-4"></label>
-          <input name="app_date" class="text-center form-input form-control col-3 date-input" type ="text" id ="datepicker-4" />
-          <button class="btn btn-primary " type="submit" id="app-date-btn">Check availability</button>
+          <div class="col-12 center-input">
+          <div class="col-3"></div>
+          <div class="col-3">
+          <input name="app_date" class="form-input form-group form-control text-center" type ="text" id ="datepicker-4" />
+          </div>
+          <div class="col-3"></div>
+          </div>    
+          <button class="btn btn-outline-secondary" type="submit" id="app-date">Check availability</button>
         </div>
 </form>
 
@@ -12,8 +19,8 @@
 
 <form action="/api/appointment/create" method="post">
 <label for="date">Appointment Date</label>
-<input type="date" name="app_date" value={{date}} id="date" readonly>
-
+<input  type="date" name="app_date" value={{date}} id="date" readonly>
+<div class="avail-margin"></div>
 <div id="services" class="dropdown">
  <label for="service">Please select a service</label>
   <select name="service" id="service">
@@ -68,8 +75,8 @@
 {{else}}
 {{/if}}
 
-<button class="btn btn-primary " type="submit" name="button">Book Lashes!</button>
-
+<div class="avail-margin"></div>
+<button class="btn btn-outline-secondary" type="submit" name="button">Book Lashes!</button>
 </form>
 
  <script>
@@ -94,5 +101,9 @@
       }
     </script>
   {{/if}}
+
+
+</section>
+
 
 <!-- <script src="/js/newAppoiment.js"></script> -->

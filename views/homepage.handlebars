@@ -11,29 +11,29 @@
 
 <section>
   {{!-- <div class="text-center card row color"> --}}
-    <div class="card-header services text-center ">
+    <div class="borders card-header services text-center col-12 color">
       <h2>Services</h2>
     </div>
     <br>
   <div class="text-center">
   {{#each services.services as |service|}}
    <span>
-    <div class="card col-3 text-center">
-      <div id="services" class="card-header card text-center ">
-        <h5>{{name}}</h5>
+    <div class="card col-3 text-center ">
+      <div id="services" class="card-header text-center service-border ">
+        <h5 href="/appointment" class="business-hours color">{{name}}</h5>
       </div>
         {{!-- <div class=""> --}}
         {{!-- <div class="row card text-center"> --}}
-          <div class="row card text-center">
+          {{!-- <div class="row card text-center"> --}}
             <div class="card-body">
-              <h6 class="card-title">Service Details</h6>
-              <h5 class="card-text">Description: {{description}}</h5>
+              {{!-- <h6 class="card-title">Service Details</h6> --}}
+              <h5 class="card-text">{{description}}</h5>
               <h5 class="card-text">Regular Price: ${{price}}</h5>
               <h5 class="card-text">Special Price ${{descounted_price}}*</h5>
               <h5 class="card-text special">*Offered after every five purchases.</h5>  
             </div>
-          </div>
-          <a href="/appointment" class="btn btn-primary">Book Lashes!</a>
+          {{!-- </div> --}}
+          <a href="/appointment" class="btn btn-outline-secondary">Book Lashes!</a>
         {{!-- </div> --}}
       {{!-- </div>   --}}
    </div>
@@ -45,12 +45,11 @@
   
 </section>
 {{#if business_hours}}
-  <div class="text-center card">
+  <div class="text-center col-12 card borders bus-h ">
    <div>
-     <h3 class="text-center business-hours">Business Hours</h3>
+     <h3 class="card-header borders business-hours color">Business Hours</h3>
    </div>
-
-    <div id="business-hours" class="text-center center card-header  col-4">
+    <div id="business-hours" class="col-12">
       <h5>From Monday to Friday</h5>
       <h5>8:00 am to 6:00 pm</h5>
       <h6>We also have late nigth appointments, just ask!</h6>
