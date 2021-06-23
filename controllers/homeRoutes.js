@@ -545,10 +545,20 @@ router.get('/checkout', withAuth, async (req, res) => {
   console.log(req.session.appointment);
   if(req.session.payment_id) {
     const session = await stripe.checkout.sessions.retrieve(req.session.payment_id);
+    console.log(req.session.appointment, session);
+    const appointmentData = await Appointment.update({ payment_id: session.id }, {
+  where: {
+    id: req.session.appointment.id
+  }
+});
     if(session.payment_status === "paid") {
-      res.render("payment-success", {logged_in: req.session.logged_in, user_id: req.session.user_id});
+      req.session.appointment = null;
+      req.session.payment_id = null;
+      res.render("payment-success", {logged_in: req.session.logged_in, user_id: req.session.user_id, appointment: req.session.appointment, payment_id: req.session.payment_id});
     } else {
-      res.render("payment-failure", {logged_in: req.session.logged_in, user_id: req.session.user_id});
+      req.session.appointment = null;
+      req.session.payment_id = null;
+      res.render("payment-failure", {logged_in: req.session.logged_in, user_id: req.session.user_id, appointment: req.session.appointment, payment_id: req.session.payment_id});
     }
   } else {
     const serviceData = await Service.findOne({where: {id: req.session.appointment.service_id}});
