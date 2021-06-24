@@ -1,29 +1,36 @@
-<section>
+<section class="text-center">
   <form action="/lady-lash-admin-homepage" method="get"class="form signup-form">
-          <div class="form-group form-floating mb-3 col-3">
-            <p>Select date to view appointments</p>
-            <input name="app_date" class="form-input form-control col-6" type ="date"/>
+          <div class="form-group form-floating mb-3 col-12">
+            <p class="color business-hours"> Hello Lady Lash!</p>
+            <p class="color business-hours"> Select date to view appointments</p>
+            <div class="col-7"></div>
+            <div class="col-3 text-center">
+            <input name="app_date" class="form-input form-control" type ="date"/>
+            </div>
+            <div class="col-3" ></div>
             <button class="btn btn-outline-secondary" type="submit">See Appointments</button>
           </div>
   </form>
 </section>
-<section>
-  <h1>{{date}}</h1>
+
+<section class="text-center">
+  <h1 class="business-hours">{{date}}</h1>
 </section>
-<section>
+<section class="col-4 text-center">
   <div class="card">
     <div class="card-body">
       {{#if availability.h08}}
-      <p>08:00 AM</p>
+      <p>8:00 AM</p>
       <p>Guest Name: {{appointments.appointment08.user.first_name}} {{appointments.appointment08.user.last_name}}</p>
       <p>Service: {{appointments.appointment08.service.name}}</p>
       {{else}}
-        <p>08:00 AM</p>
+        <p>8:00 AM</p>
         <p>Open</p>
         {{!-- <button type="submit" name="block-time" data-time-block:"08:00">Block Time</button> --}}
       {{/if}}
     </div>
   </div>
+  <div class="avail-margin"></div>
   <div class="card">
     <div class="card-body">
       {{#if availability.h10}}
@@ -37,6 +44,7 @@
       {{/if}}
     </div>
   </div>
+  <div class="avail-margin"></div>
   <div class="card">
     <div class="card-body">
       {{#if availability.h12}}
@@ -50,6 +58,7 @@
       {{/if}}
     </div>
   </div>
+  <div class="avail-margin"></div>
   <div class="card">
     <div class="card-body">
       {{#if availability.h14}}
@@ -63,6 +72,7 @@
       {{/if}}
     </div>
   </div>
+  <div class="avail-margin"></div>
   <div class="card">
     <div class="card-body">
       {{#if availability.h16}}
@@ -76,6 +86,7 @@
       {{/if}}
     </div>
   </div>
+  <div class="avail-margin"></div>
   <div class="card">
     <div class="card-body">
       {{#if availability.h18}}
@@ -89,6 +100,7 @@
       {{/if}}
     </div>
   </div>
+  <div class="avail-margin"></div>
   <div class="card">
     <div class="card-body">
       {{#if availability.h20}}
