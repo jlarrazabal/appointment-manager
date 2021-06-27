@@ -59,8 +59,8 @@ router.post('/create-checkout-session', async (req, res) => {
       });
     console.log(price)
     const session = await stripe.checkout.sessions.create({
-        success_url: 'http://localhost:3001/checkout',
-        cancel_url: 'https://example.com/cancel',
+        success_url: 'https://fathomless-eyrie-79379.herokuapp.com/checkout',
+        cancel_url: 'https://fathomless-eyrie-79379.herokuapp.com/checkout',
         payment_method_types: ['card'],
         line_items: [
           {
