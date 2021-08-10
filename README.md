@@ -18,6 +18,11 @@
  ## Usage
  As guest you will be able to create an account or login, book appointments, see the availability and pay for you booking.
 
+ ## Screenshot for the application
+
+![Screenshot](./assets/image/project2.png)
+
+
  ## Demo
  https://drive.google.com/file/d/1BZa0OB1JHJaOuteAPJS_IEzafwC4qnH0/view
  
